@@ -3,9 +3,9 @@ Scripts and tests for calculating a wide array of functions ans statistics using
 # Scripts
 
 
-###generalized_zonal_stats.py
+### GeneralizedZonalStats.py
 
-###test_gen_zonal_stats.py
+### test_GeneralizedZonalStats.py
 
 # Description 
 Tests for LS_metrics outputs main procedures for patch ids in temporal series, and for generalized_zonal_stats defs.
