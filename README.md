@@ -15,10 +15,10 @@ Scripts and tests for calculating a wide array of functions ans statistics for m
 + run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons 
 
 ### Last version of LSmetrics tested available at
-https://github.com/LEEClab/LS_METRICS
+[https://github.com/LEEClab/LS_METRICS](https://github.com/LEEClab/LS_METRICS)
 
 ### Original scripts
-https://github.com/LEEClab/GeneralizedZonalStats
+[https://github.com/LEEClab/GeneralizedZonalStats](https://github.com/LEEClab/GeneralizedZonalStats)
 
 #### Helpful Comments
 
