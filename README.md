@@ -43,10 +43,10 @@ if it's all that ends with forest_albers, type: * forest_albers in the white box
 + import SCRIPT # imports the script and make your life easier
 + After that, if everything is correctly written in the script, you can wait for the results and rest.
 
-If you have questions, contact us at one of the e-mails below:
+If you have questions, contact us:
 
 Name |Email 
 --- | --- 
-**Bernardo Niebuhr** | `bernardo_brandaum@yahoo.com.br` 
-**Renata Muylaert** | `renatamuy@gmail.com` 
+**Bernardo Niebuhr** | bernardo_brandaum@yahoo.com.br 
+**Renata Muylaert** | renatamuy@gmail.com 
 
