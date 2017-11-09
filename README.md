@@ -10,7 +10,7 @@ Scripts and tests for calculating a wide array of functions ans statistics for m
 
 # Functions implemented for zonal statistics in GeneralizedZonalStats:
 + create_new_columns: auxiliary function to store landscape metrics in the attribute table of a shapefile
-+ number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask. The pid rasters can be easily generated from LSMetris
++ number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask. The pid rasters can be easily generated from [LSMetrics](https://github.com/LEEClab/LS_METRICS)
 + proportion_habitat: calculates proportion of cells with value equals to 1 in a binary raster
 + run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons 
 
