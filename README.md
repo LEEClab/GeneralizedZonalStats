@@ -45,6 +45,8 @@ if it's all that ends with forest_albers, type: * forest_albers in the white box
 
 If you have questions, contact us at one of the e-mails below:
 
-+ Bernardo Niebuhr bernardo_brandaum@yahoo.com.br
-+ Renata L. Muyaert renatamuy@gmail.com
+Name |Email 
+--- | --- 
+**Bernardo Niebuhr** | `bernardo_brandaum@yahoo.com.br` 
+**Renata Muylaert** | `renatamuy@gmail.com` 
 
