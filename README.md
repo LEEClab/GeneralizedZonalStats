@@ -10,6 +10,12 @@ Scripts and tests for calculating a wide array of functions ans statistics using
 # Description 
 Tests for LS_metrics outputs main procedures for patch ids in temporal series, and for generalized_zonal_stats defs.
 
+# Functions implemented for zonal statistics in GeneralizedZonalStats:
+⋅⋅* create_new_columns: auxiliary function to store landscape metrics in the attribute table of a shapefile
+⋅⋅* number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask.
+⋅⋅* proportion_habitat: calculates proportion of cells with value equals to 1 in a binary raster
+⋅⋅* run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons 
+
 ### Last version of LSmetrics tested available at
 https://github.com/LEEClab/LS_METRICS
 
@@ -38,3 +44,4 @@ if it's all that ends with forest_albers, type: * forest_albers in the white box
 - os.chdir('WORKDIR') # set directory where the script was saved
 - import SCRIPT # imports the script and make your life easier
 - After that, if everything is correctly written in the script, you can wait for the results and rest.
+
