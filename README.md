@@ -1,18 +1,16 @@
 # GeneralizedZonalStats
-Scripts and tests for calculating a wide array of functions ans statistics using zonal masks within GRASS GIS
-# Scripts
+# Description 
+Scripts and tests for calculating a wide array of functions ans statistics for multiple rasters using zonal masks within GRASS GIS
 
+# Scripts
 
 ### GeneralizedZonalStats.py
 
 ### test_GeneralizedZonalStats.py
 
-# Description 
-Tests for LS_metrics outputs main procedures for patch ids in temporal series, and for generalized_zonal_stats defs.
-
 # Functions implemented for zonal statistics in GeneralizedZonalStats:
 + create_new_columns: auxiliary function to store landscape metrics in the attribute table of a shapefile
-+ number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask.
++ number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask. The pid rasters can be easily generated from LSMetris
 + proportion_habitat: calculates proportion of cells with value equals to 1 in a binary raster
 + run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons 
 
@@ -22,7 +20,7 @@ https://github.com/LEEClab/LS_METRICS
 ### Original scripts
 https://github.com/LEEClab/GeneralizedZonalStats
 
-#### Comments
+#### Helpful Comments
 
 - The script which calculates patch number in zonal statistics depends on LSmetrics outputs of pids (patch id info); 
 - LSmetrics gui works well for a single raster, but fot running the option for a sequence of rasters with a string common pattern in raster file name, you must use the symbol "*": 
@@ -30,11 +28,11 @@ for example, if the file names' common pattern is all that starts with BR, put: 
 if it is all that has "forest" in the middle of file name, put: * forest *;
 if it's all that ends with forest_albers, type: * forest_albers in the white box of LSmetrics (Pattern).
 
-#### Some important tips for running python script without copying and pasting code
+#### Important tips for running python script without copying and pasting code in Python Grass
 
-- Use an auxiliary set of five lines as a starter, so you don´t need to type anything else on the terminal
-- Always type code in the black terminal screen. The python shell in GRASS GIS DO NOT run well all the defs created!!!
-- Remove the command python from inner script. If you let it there, the code will stop, since from the auxiliary code you already got into python inside GRASS command line. However, if you could call a python code from GRASS command line without calling python first, then the auxiliary code would change. But I don´t know how to start a large script differently
++ Use an auxiliary set of five lines as a starter, so you don´t need to type anything else on the terminal
++ Always type code in the black terminal screen. The python shell in GRASS GIS DO NOT run well all the defs created!!!
++ Remove the command python from inner script. If you let it there, the code will stop, since from the auxiliary code you already got into python inside GRASS command line. However, if you could call a python code from GRASS command line without calling python first, then the auxiliary code would change. But I don´t know how to start a large script differently;
 
 ### The auxiliary starter code has five lines
 
