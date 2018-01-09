@@ -1,8 +1,8 @@
-# GeneralizedZonalStats
-# Description 
-Scripts and tests for calculating a wide array of functions ans statistics for multiple rasters using zonal masks within GRASS GIS
+## GeneralizedZonalStats
+## Description 
+Here we provide scripts and tests for calculating a wide array of functions ans statistics for multiple rasters using zonal masks within GRASS GIS.
 
-# Scripts
+## Scripts
 
 ### [GeneralizedZonalStats.py](https://github.com/LEEClab/GeneralizedZonalStats/blob/master/GeneralizedZonalStats.py)
 
@@ -20,7 +20,7 @@ Scripts and tests for calculating a wide array of functions ans statistics for m
 ### Original scripts
 [https://github.com/LEEClab/GeneralizedZonalStats](https://github.com/LEEClab/GeneralizedZonalStats)
 
-#### Helpful Comments
+#### Helpful comments
 
 - The script which calculates patch number in zonal statistics depends on LSmetrics outputs of pids (patch id info); 
 - LSmetrics gui works well for a single raster, but fot running the option for a sequence of rasters with a string common pattern in raster file name, you must use the symbol "*": 
@@ -28,7 +28,7 @@ for example, if the file names' common pattern is all that starts with BR, put: 
 if it is all that has "forest" in the middle of file name, put: * forest *;
 if it's all that ends with forest_albers, type: * forest_albers in the white box of LSmetrics (Pattern).
 
-#### Important tips for running python script without copying and pasting code in Python Grass
+#### Important tips for running python script without copying and pasting code in Python in Grass
 
 + Use an auxiliary set of five lines as a starter, so you don´t need to type anything else on the terminal
 + Always type code in the black terminal screen. The python shell in GRASS GIS DO NOT run well all the defs created!!!
@@ -43,7 +43,7 @@ if it's all that ends with forest_albers, type: * forest_albers in the white box
 + import SCRIPT # imports the script and make your life easier
 + After that, if everything is correctly written in the script, you can wait for the results and rest.
 
-If you have questions, contact us:
+If you have questions, please contact us:
 
 Name |Email 
 --- | --- 
