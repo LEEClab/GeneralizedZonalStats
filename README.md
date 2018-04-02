@@ -1,18 +1,21 @@
-## GeneralizedZonalStats
+# GeneralizedZonalStats - a tool for calculating (virtually any) index based on zones
+
 ## Description 
-Here we provide scripts and tests for calculating a wide array of functions ans statistics for multiple rasters using zonal masks within GRASS GIS.
+
+Here we provide scripts (code and scripts for testing) for calculating a wide array of functions and statistics for multiple rasters using zonal masks within GRASS GIS.
 
 ## Scripts
 
-### [GeneralizedZonalStats.py](https://github.com/LEEClab/GeneralizedZonalStats/blob/master/GeneralizedZonalStats.py)
+- [`GeneralizedZonalStats.py`](https://github.com/LEEClab/GeneralizedZonalStats/blob/master/GeneralizedZonalStats.py): main code.
 
-### [test_GeneralizedZonalStats.py](https://github.com/LEEClab/GeneralizedZonalStats/blob/master/test_GeneralizedZonalStats.py)
+- [`test_GeneralizedZonalStats.py`](https://github.com/LEEClab/GeneralizedZonalStats/blob/master/test_GeneralizedZonalStats.py): script for testing.
 
 ## Functions implemented for zonal statistics in GeneralizedZonalStats:
-+ create_new_columns: auxiliary function to store landscape metrics in the attribute table of a ESRI shapefile
-+ number_patches: calculates number of unique patches based on patch identification (pid) raster. Patches are counted as unique from the original raster for the entire region, and are not cut from zonal mask. The pid rasters can be easily generated from [LSMetrics](https://github.com/LEEClab/LS_METRICS)
-+ proportion_habitat: calculates proportion of cells with value equals to 1 in a binary raster
-+ run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons 
+
++ create_new_columns: auxiliary function create new columns (intended to store landscape metrics or statistics) in the attribute table of a ESRI shapefile.
++ number_patches: calculates number of unique patches based on a patch identification (pid) raster. Patches are counted as unique based on its original raster extent, and are not cut based on the zonal mask. The pid rasters can be easily generated from [LSMetrics](https://github.com/LEEClab/LS_METRICS) or other landscape ecology tools.
++ proportion_habitat: calculates proportion of cells with value equals to 1 in a binary raster that represents some kind of habitat or land use type.
++ run_zonal_stats: applies functions of interest for landscape metrics on the shapefile containing multiple polygons.
 
 ### Last version of LSmetrics tested available at
 [https://github.com/LEEClab/LS_METRICS](https://github.com/LEEClab/LS_METRICS)
@@ -23,7 +26,7 @@ Here we provide scripts and tests for calculating a wide array of functions ans 
 #### Helpful comments
 
 - The script which calculates patch number in zonal statistics depends on LSmetrics outputs of pids (patch id info); 
-- LSmetrics gui works well for a single raster, but fot running the option for a sequence of rasters with a string common pattern in raster file name, you must use the symbol "*": 
+- LSmetrics gui works well for a single raster, but for running the option for a sequence of rasters with a string common pattern in raster file name, you must use the symbol "*": 
 for example, if the file names' common pattern is all that starts with BR, put: BR *;
 if it is all that has "forest" in the middle of file name, put: * forest *;
 if it's all that ends with forest_albers, type: * forest_albers in the white box of LSmetrics (Pattern).
