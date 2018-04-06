@@ -1,0 +1,8 @@
+COMMAND: v.in.ogr --overwrite input="mun_teste_wgs84.shp" output="mun_teste_wgs84" min_area=0.0001 type="" snap=-1
+GISDBASE: /home/leecb/Github/GeneralizedZonalStats
+LOCATION: newLocation MAPSET: PERMANENT USER: leecb DATE: Fri Apr  6 16:42:01 2018
+-----------------------------------------------------
+74 input polygons
+Total area: 7.70325E+10 (74 areas)
+Overlapping area: 0 (0 areas)
+Area without category: 0 (0 areas)
