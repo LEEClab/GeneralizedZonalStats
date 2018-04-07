@@ -84,7 +84,7 @@ input_rast = ['BR_2001_euca_9']
 teststats = GeneralizedZonalStats(input_shape = input_shp, input_rasters = input_rast, folder = input_dir)
 
 # Create new cols
-cols = ['p_euca_2001'] # Column name
+cols = ['p_euc_2001'] # Column name
 col_type = ['float'] # Column type
 
 # WARNING! GRASS GIS does not like col names longer than 8-10 characters, so try to be very concise!!
@@ -143,23 +143,23 @@ os.chdir(input_dir)
 
 #------------------
 # 4.3.
-# Running for number of patches for 2002-2004
+# Running for number of patches for 2001-2004
 
 # Input shape and rasters
 input_shp = 'mun_teste_wgs84'
-input_rast = ['BR_2002_euca_9_pid', 'BR_2003_euca_9_pid', 'BR_2004_euca_9_pid']
+input_rast = ['BR_2001_euca_9_pid', 'BR_2002_euca_9_pid', 'BR_2003_euca_9_pid', 'BR_2004_euca_9_pid']
 
 # Initialize and select maps to be used in zonal stats
 test_np = GeneralizedZonalStats(input_shape = input_shp, input_rasters = input_rast, folder = input_dir)
 
 # Create new cols
-cols = ['np_2002', 'np_2003', 'np_2004'] # Col names
-col_type = ['int', 'int', 'int'] # Col type
+cols = ['np_2001', 'np_2002', 'np_2003', 'np_2004'] # Col names
+col_type = ['int', 'int', 'int', 'int'] # Col type
 
 # WARNING! GRASS GIS does not like col names longer than 8-10 characters, so try to be very concise!!
 
 # Create cols
-test_np.create_new_column(column_names = cols, type_col=col_type)
+test_np.create_new_column(column_names = cols, type_col = col_type)
 
 # Monitoring time
 start = time.time()

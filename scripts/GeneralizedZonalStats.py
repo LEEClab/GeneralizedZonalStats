@@ -373,7 +373,7 @@ class GeneralizedZonalStats():
         # If the previous steps (load/select maps, create/set columns) were done with success, go on
         if self.set_cols and self.load_ok:
             # Get row names (cat)
-            cat_info = grass.read_command('db.select', sql = 'SELECT cat FROM '+self.input_shape+).split('\n')
+            cat_info = grass.read_command('db.select', sql = 'SELECT cat FROM '+self.input_shape).split('\n')
             # exclude last line and header
             cats = [val for val in cat_info if val != '' and val != 'cat']
             
