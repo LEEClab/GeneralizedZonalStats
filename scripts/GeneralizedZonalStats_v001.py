@@ -387,12 +387,20 @@ class GeneralizedZonalStats():
             for cat in cats:
                 
                 # Take resolution from raster map
-                rast_info = r.raster_info(self.input_rasters[0])
-                ewres = rast_info['ewres']
-                nsres = rast_info['nsres']
+                #rast_info = r.raster_info(self.input_rasters[0])
+                #ewres = rast_info['ewres']
+                #nsres = rast_info['nsres']
+                
+                ext_polygon = grass.read_command('v.db.select', map = self.input_shape, where = 'cat = '+cat, flags = 'r')
+                ext_polygon_list = ext_polygon.split('\n')
+                n = [i for i in ext_polygon_list if 'n=' in i][0].replace('n=', '')
+                s = [i for i in ext_polygon_list if 's=' in i][0].replace('s=', '')
+                e = [i for i in ext_polygon_list if 'e=' in i][0].replace('e=', '')
+                w = [i for i in ext_polygon_list if 'w=' in i][0].replace('w=', '')                
                 
                 # Create a raster for the feature
-                grass.run_command('g.region', vector = self.input_shape, ewres = ewres, nsres = nsres, align = self.input_rasters[0])
+                #grass.run_command('g.region', vector = self.input_shape, ewres = ewres, nsres = nsres, align = self.input_rasters[0])
+                grass.run_command('g.region', n = n, s = s, e = e, w = w, align = self.input_rasters[0])
                 grass.run_command('v.to.rast', input = self.input_shape, output = 'temp_rast', cats = cat, use='val', overwrite = True)
                 
                 # Set region to the feature
@@ -429,7 +437,100 @@ class GeneralizedZonalStats():
                 raise Exception('Maps were not loaded successfully. Please retry.')
             
             if not self.set_cols:
+                raise Exception('Columns were not set successfully. Please retry.')
+            
+            
+    # Function run_zonal_stats v2 - run the the function passed as argument for each zone/feature
+    def run_zonal_stats_v2(self, function, select_cats = 'all', *args, **kwargs):
+        '''
+        Function run_zonal_stats
+        
+        This function ...
+        
+        Parameters
+        ----------
+        function: Python function
+            Name of the function to be used to calculate over masks/vetor features.
+        cats: list with integers in character form ('1' and not 1)
+            List with values of lines of the input vector/shape (cats), representing the polygons/features of
+            this vector to be processed. The default is the string 'all', in case all polygons will be processed.
+        *args: several
+            Argument of the function, not named (only value, e.g. 30, 'int')
+        **kwargs: several
+            Optional arguments of the function, named (option = value, e.g. threshold = 50)
+        '''
+        
+        # If the previous steps (load/select maps, create/set columns) were done with success, go on
+        if self.set_cols and self.load_ok:
+            # Get row names (cat)
+            cat_info = grass.read_command('db.select', sql = 'SELECT cat FROM '+self.input_shape).split('\n')
+            # exclude last line and header
+            cats = [val for val in cat_info if val != '' and val != 'cat']
+            
+            # select only rows/polygons of interest, from the input shape
+            if select_cats != 'all' and len(select_cats) <= len(cats): 
+                cats = [val for val in cats if val in select_cats]
+            
+            # We can include something to calculate only for selected features and not all
+            
+            # For each selected feature
+            for cat in cats:
+                
+                # Take resolution from raster map
+                #rast_info = r.raster_info(self.input_rasters[0])
+                #ewres = rast_info['ewres']
+                #nsres = rast_info['nsres']
+                
+                ext_polygon = grass.read_command('v.db.select', map = self.input_shape, where = 'cat = '+cat, flags = 'r')
+                ext_polygon_list = ext_polygon.split('\n')
+                n = [i for i in ext_polygon_list if 'n=' in i][0].replace('n=', '')
+                s = [i for i in ext_polygon_list if 's=' in i][0].replace('s=', '')
+                e = [i for i in ext_polygon_list if 'e=' in i][0].replace('e=', '')
+                w = [i for i in ext_polygon_list if 'w=' in i][0].replace('w=', '')                
+                
+                # Create a raster for the feature
+                #grass.run_command('g.region', vector = self.input_shape, ewres = ewres, nsres = nsres, align = self.input_rasters[0])
+                grass.run_command('g.region', n = n, s = s, e = e, w = w, align = self.input_rasters[0])
+                grass.run_command('v.to.rast', input = self.input_shape, output = 'temp_rast', cats = cat, use='val', overwrite = True)
+                
+                # Set region to the feature
+                grass.run_command('g.region', raster = 'temp_rast', zoom = 'temp_rast') 
+                
+                # For each raster/column
+                for i in range(len(self.input_rasters)):
+                    
+                    # Column and raster
+                    col = self.column_names[i]
+                    rast = self.input_rasters[i]
+                    
+                    # Run the equivalent to 'r.mask' for the feature, but with r.mapcalc
+                    rast_cut = 'temp_rast_input'
+                    expression = rast_cut+' = if(temp_rast == 1, '+rast+', null())'
+                    grass.mapcalc(expression, overwrite = True)
+                    
+                    # Run function
+                    val = function(rast_cut, *args, **kwargs)
+                    
+                    # Update value in the input shape attribute table
+                    grass.run_command('v.db.update', map = self.input_shape, column = col, value = str(val), where='cat = '+cat)
+                    
+                    # Remove raster of interest for the polygon
+                    grass.run_command('g.remove', flags = 'f', type = 'raster', pattern = rast_cut, verbose = False)
+                
+                # Remove temp raster
+                grass.run_command('g.remove', flags = 'f', type = 'raster', pattern = 'temp_rast', verbose = False)
+                
+                # Message - cat ok
+                grass.message("Feature "+str(cat)+' processed with success!')
+        
+        # If any of the previous moments were not successful, stop.
+        else:
+            if not self.load_ok:
+                raise Exception('Maps were not loaded successfully. Please retry.')
+            
+            if not self.set_cols:
                 raise Exception('Columns were not set successfully. Please retry.')        
+    
 
 
         

@@ -37,8 +37,10 @@ grass.run_command('v.in.ogr', input = shape_name+'.shp', output = shape_name, ov
 
 # Import rasters (areas of Eucalyptus plantation in 2001-2004)
 maps = ['BR_2001_euca_9', 'BR_2002_euca_9', 'BR_2003_euca_9', 'BR_2004_euca_9']
+
 for i in maps:
     grass.run_command('r.in.gdal', input = i+'.tif', output = i, overwrite = True)
+
 
 #------------------
 # 3.
@@ -70,7 +72,7 @@ script_dir = r'/home/leecb/Github/GeneralizedZonalStats/scripts'
 os.chdir(script_dir)
 
 # Import GeneralizedZonalStats class and functions
-from GeneralizedZonalStats import GeneralizedZonalStats, proportion_habitat, number_patches
+from GeneralizedZonalStats_v001 import GeneralizedZonalStats, proportion_habitat, number_patches
 
 #------------------
 # 4.1.
@@ -108,14 +110,16 @@ os.chdir(input_dir)
 
 # Input shape and rasters
 input_shp = 'mun_teste_wgs84'
-input_rast = ['BR_2002_euca_9', 'BR_2003_euca_9', 'BR_2004_euca_9']
+input_rast = ['BR_2001_euca_9', 'BR_2002_euca_9', 'BR_2003_euca_9', 'BR_2004_euca_9']
 
 # Initialize and select maps to be used in zonal stats
 test_prop_euca = GeneralizedZonalStats(input_shape = input_shp, input_rasters = input_rast, folder = input_dir)
 
 # Create new cols
-cols = ['p_eu_2002', 'p_eu_2003', 'p_eu_2004'] # Col name
-col_type = ['float', 'float', 'float'] # Col type
+#cols = ['p_eu_2001', 'p_eu_2002', 'p_eu_2003', 'p_eu_2004'] # Col name
+#cols = ['p_e2_2001', 'p_e2_2002', 'p_e2_2003', 'p_e2_2004'] # Col name
+cols = ['p_e3_2001', 'p_e3_2002', 'p_e3_2003', 'p_e3_2004'] # Col name
+col_type = ['float', 'float', 'float', 'float'] # Col type
 
 # WARNING! GRASS GIS does not like col names longer than 8-10 characters, so be very concise!!
 
@@ -126,13 +130,14 @@ test_prop_euca.create_new_column(column_names = cols, type_col=col_type)
 start = time.time()
 
 # Calculate proportion of eucalyptus in each feature using proportion_habitat function
-test_prop_euca.run_zonal_stats(proportion_habitat)
+#test_prop_euca.run_zonal_stats(proportion_habitat)
+test_prop_euca.run_zonal_stats_v2(proportion_habitat)
 
 # Monitoring time
 end = time.time()
 
 # Print total time
-print 'The zonal stats for prop of habitat for 3 years took us '+str((end - start)/60)+' minutes.'
+print 'The zonal stats for prop of habitat for 4 years took us '+str((end - start)/60)+' minutes.'
 
 # Export shapefile
 os.chdir(input_dir)
